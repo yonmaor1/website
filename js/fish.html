@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>p5.js 15104 fall 2019 v2, Edit index.html to Change This Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.js"></script>
+    <script src="fish.js" type="text/javascript"></script>
+    <script>
+var sndOriginalDraw;
+var sndOriginalMousePressed;
+var soundStart = false;
+function useSound() {
+    if (typeof draw == "function") {
+        sndOriginalDraw = draw;
+    }
+    draw = sndDraw;
+    if (typeof mousePressed === "function") {
+        sndOriginalMousePressed = mousePressed;
+    }
+    mousePressed = sndMousePressed;
+    sndMousePressed();
+}
+function sndDraw() {
+    background(200);
+    text("Please click anywhere to start audio.", 5, 15);
+}
+function sndMousePressed() {
+    if (soundStart === false) {
+        // strangely, audio might just start running without help here, so
+        // test it again before calling resume()
+        if (getAudioContext().state != "running") {
+            getAudioContext().resume();
+        }
+        if (getAudioContext().state === "running") {
+            soundStart = millis(); // record audio start time
+            soundSetup(); // student should add code to soundSetup()
+            if (typeof sndOriginalDraw === "undefined") {
+                draw = undefined;
+            } else {
+                draw = sndOriginalDraw;
+            }
+            if (typeof sndOriginalMousePressed === "undefined") {
+                mousePressed = undefined;
+            } else {
+                mousePressed = sndOriginalMousePressed;
+            }
+        }
+    }
+}
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
