@@ -25,8 +25,11 @@ function preload() {
     //impact = loadFont('fonts/impact.ttf');
 }
 
+let cnv;
+
 function setup() {
-    createCanvas(400, 600);
+    cnv = createCanvas(400, 600);
+    cnv.parent('fires')
     noStroke();
     numRows = fires.getRowCount();
     background('black');
