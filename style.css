@@ -467,6 +467,15 @@ figcaption {
   grid-gap: 10px;
 }
 
+.misc {
+  grid-column: 2/5;
+  grid-row: auto;
+
+  display: grid;
+  grid-template-rows: 30% 30% 30%;
+  grid-gap: 10px;
+}
+
 #threeD {
   background-image: url("img/plastocene.jpg");
   grid-column: 2/5;
